@@ -9,11 +9,14 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import java.util.Scanner;
+import java.util.stream.Stream;
+
 public class Lox {
     public static void main(String[] args) throws IOException {
         if (args.length > 1) {
             System.out.println("Usage: jlox [script]");
-        } else if (args.length == 0) {
+        } else if (args.length == 1) {
             runFile(args[0]);
         } else {
             runPrompt();
@@ -36,7 +39,11 @@ public class Lox {
         run(new String(bytes, Charset.defaultCharset()));
     }
 
-    private static void run(String string) {
-        throw new UnsupportedOperationException("Test");
+    private static void run(String contents) {
+        //Lets print the tokens in this chapter
+
+        Scanner scanner = new Scanner(contents);
+        Stream<String> tokens = scanner.tokens();
+        tokens.forEach(System.out::println);
     }
 }
